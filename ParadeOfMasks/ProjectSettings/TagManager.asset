@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - ' public LgroundLayerayerMask groundLayer; // Insert the layer here.'
+  - groundLayer
+  - player
   - 
   - 
   - 

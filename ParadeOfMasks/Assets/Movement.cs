@@ -27,8 +27,7 @@ public class Movement : MonoBehaviour
 
 
     // Use this for initialization
-
-    bool IsGrounded()
+/*    bool IsGrounded()
     {
         Vector2 position = transform.position;
         Vector2 direction = Vector2.down;
@@ -41,9 +40,9 @@ public class Movement : MonoBehaviour
             return true;
         }
         return false;
-
-
     }
+
+    */
     void Awake()
     {
         // anim = GetComponent<Animator>();
@@ -51,27 +50,9 @@ public class Movement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+ 
 
-        bool space = Input.GetKeyDown("space");
-        bool up = Input.GetKeyDown("up");
-
-        int yMovement = (int)Input.GetAxisRaw("Horizontal");
-
-        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-
-        if (IsGrounded())
-        {
-            Debug.Log("help");
-            if ((space || up))
-            {
-                jump = true;
-            }
-        }
-    }
-
+   
     // do physics in FixedUpdate
     void FixedUpdate()
     {
@@ -103,6 +84,26 @@ public class Movement : MonoBehaviour
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        bool space = Input.GetKeyDown("space");
+        bool up = Input.GetKeyDown("up");
+
+        int yMovement = (int)Input.GetAxisRaw("Horizontal");
+
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+       
+            Debug.Log("help");
+            if ((space || up) && grounded)
+            {
+                jump = true;
+            }
+  
     }
 
     // Changes the way the character is facing by negating X
