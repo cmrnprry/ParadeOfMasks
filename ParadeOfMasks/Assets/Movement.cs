@@ -15,7 +15,11 @@ public class Movement : MonoBehaviour
     // when you jump, this wil check if the ground is below you
     // public Transform groundCheck;
     //Makes the sprite visible
+<<<<<<< HEAD
    private SpriteRenderer sr;
+=======
+    private SpriteRenderer sr;
+>>>>>>> The-boys
 
     public float jumpForce = 1000f;
     private bool isGrounded;        //this variable will tell if our player is grounded or not
@@ -31,13 +35,17 @@ public class Movement : MonoBehaviour
 
 
     // Use this for initialization
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> The-boys
     void Awake()
     {
         // anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+<<<<<<< HEAD
     }
 
     bool IsGrounded()
@@ -56,6 +64,8 @@ public class Movement : MonoBehaviour
         Debug.Log("please");
         return false;
 
+=======
+>>>>>>> The-boys
     }
 
 
@@ -67,6 +77,7 @@ public class Movement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(feetPos.position, circleRadius, whatIsGround);
         //we check if isGrounded is true and we pressed Space button
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+<<<<<<< HEAD
         {
             jump = true;                           //we set isJumping to true
             jumpTimeCounter = jumpTime;                 //set jumpTimeCounter
@@ -92,6 +103,33 @@ public class Movement : MonoBehaviour
             jump = false;                          //set isJumping to false
         }
 
+=======
+        {
+            jump = true;                           //we set isJumping to true
+            jumpTimeCounter = jumpTime;                 //set jumpTimeCounter
+            rb2d.velocity = Vector2.up * jumpForce;       //add velocity to player
+        }
+
+        //if Space key is pressed and isJumping is true
+        if (Input.GetKey(KeyCode.Space) && jump == true)
+        {
+            if (jumpTimeCounter > 0)                    //we check if jumpTimeCounter is more than 0
+            {
+                rb2d.velocity = Vector2.up * jumpForce;   //add velocity
+                jumpTimeCounter -= Time.deltaTime;      //reduce jumpTimeCounter by Time.deltaTime
+            }
+            else                                        //if jumpTimeCounter is less than 0
+            {
+                jump = false;                      //set isJumping to false
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))              //if we unpress the Space key
+        {
+            jump = false;                          //set isJumping to false
+        }
+
+>>>>>>> The-boys
     }
 
     // do physics in FixedUpdate

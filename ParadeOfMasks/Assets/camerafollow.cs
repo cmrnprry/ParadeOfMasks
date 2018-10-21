@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camerafollow : MonoBehaviour {
+public class CameraFollow : MonoBehaviour
+{
 
     public GameObject thingsToFollow;
 
     private Vector3 offset;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         offset = transform.position - thingsToFollow.transform.position;
-        
-    }
-	
 
-	void LateUpdate () {
+    }
+
+
+    void LateUpdate()
+    {
         transform.position = thingsToFollow.transform.position + offset;
 
     }
