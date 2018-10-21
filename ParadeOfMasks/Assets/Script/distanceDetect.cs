@@ -18,7 +18,7 @@ public class distanceDetect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        dist = Vector3.Distance(Enemy.transform.position, Player.transform.position);
+   /*     dist = Vector3.Distance(Enemy.transform.position, Player.transform.position);
         if (dist < distance && movement.IsMasked == false)
         {
             movement.maxSpeed = 2;
@@ -29,7 +29,7 @@ public class distanceDetect : MonoBehaviour {
         }
         else {
             movement.maxSpeed = 5;
-        }
+        }*/
     }
  }
 
