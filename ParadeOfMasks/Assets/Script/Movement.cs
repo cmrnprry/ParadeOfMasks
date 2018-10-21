@@ -15,11 +15,8 @@ public class Movement : MonoBehaviour
     // when you jump, this wil check if the ground is below you
     // public Transform groundCheck;
     //Makes the sprite visible
-<<<<<<< HEAD
-   private SpriteRenderer sr;
-=======
     private SpriteRenderer sr;
->>>>>>> The-boys
+    private SpriteRenderer sr;
 
     public float jumpForce = 1000f;
     private bool isGrounded;        //this variable will tell if our player is grounded or not
@@ -35,19 +32,13 @@ public class Movement : MonoBehaviour
 
 
     // Use this for initialization
-<<<<<<< HEAD
-
-
-=======
->>>>>>> The-boys
     void Awake()
     {
         // anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-<<<<<<< HEAD
     }
-
+    
     bool IsGrounded()
     {
         Vector2 position = transform.position;
@@ -63,12 +54,9 @@ public class Movement : MonoBehaviour
 
         Debug.Log("please");
         return false;
-
-=======
->>>>>>> The-boys
+        
     }
-
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -77,7 +65,7 @@ public class Movement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(feetPos.position, circleRadius, whatIsGround);
         //we check if isGrounded is true and we pressed Space button
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
-<<<<<<< HEAD
+/*
         {
             jump = true;                           //we set isJumping to true
             jumpTimeCounter = jumpTime;                 //set jumpTimeCounter
@@ -103,7 +91,7 @@ public class Movement : MonoBehaviour
             jump = false;                          //set isJumping to false
         }
 
-=======
+        */
         {
             jump = true;                           //we set isJumping to true
             jumpTimeCounter = jumpTime;                 //set jumpTimeCounter
@@ -128,8 +116,7 @@ public class Movement : MonoBehaviour
         {
             jump = false;                          //set isJumping to false
         }
-
->>>>>>> The-boys
+        
     }
 
     // do physics in FixedUpdate
