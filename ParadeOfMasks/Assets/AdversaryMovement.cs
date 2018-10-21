@@ -25,13 +25,13 @@ public class AdversaryMovement : MonoBehaviour {
     // flips the adversay sprite when they turn
     void Flip()
     {
-        Debug.Log("hello");
+     //   Debug.Log("hello");
 
         isFacingRight = !isFacingRight;
 
         if (sr != null && isFacingRight)
         {
-            Debug.Log("Are you doing it");
+           // Debug.Log("Are you doing it");
             sr.flipX = true;
         } else
         {

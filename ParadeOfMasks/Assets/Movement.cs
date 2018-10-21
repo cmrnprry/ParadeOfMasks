@@ -14,27 +14,61 @@ public class Movement : MonoBehaviour
     public float jumpForce = 1000f;
     // when you jump, this wil check if the ground is below you
     public Transform groundCheck;
+    //Makes the sprite visible
+    private SpriteRenderer sr;
+
+    public LayerMask groundLayer;
 
 
-    private bool grounded = false;
+
+    private bool grounded = true;
     //private Animator anim;
     private Rigidbody2D rb2d;
 
 
     // Use this for initialization
-    void Start()
+
+    bool IsGrounded()
     {
-       // anim = GetComponent<Animator>();
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 1.0f;
+
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+        if (hit.collider != null)
+        {
+            Debug.Log("bgkfj");
+            return true;
+        }
+        return false;
+
+
+    }
+    void Awake()
+    {
+        // anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        if (Input.GetButtonDown("Jump") && grounded)
+
+        bool space = Input.GetKeyDown("space");
+        bool up = Input.GetKeyDown("up");
+
+        int yMovement = (int)Input.GetAxisRaw("Horizontal");
+
+        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        if (IsGrounded())
         {
-            jump = true;
+            Debug.Log("help");
+            if ((space || up))
+            {
+                jump = true;
+            }
         }
     }
 
@@ -52,20 +86,27 @@ public class Movement : MonoBehaviour
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
-        if (h > 0 && !facingRight)
+        if (h > 0 && facingRight)
+        {
             Flip();
-        else if (h < 0 && facingRight)
+
+        }
+        else if (h < 0 && !facingRight)
+        {
             Flip();
+        }
 
         if (jump)
         {
-           //anim.SetTrigger("Jump");
+            Debug.Log("helo");
+            //anim.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
         }
     }
 
     // Changes the way the character is facing by negating X
+
     void Flip()
     {
         facingRight = !facingRight;
