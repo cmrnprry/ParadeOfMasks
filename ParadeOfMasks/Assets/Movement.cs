@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     // when you jump, this wil check if the ground is below you
     // public Transform groundCheck;
     //Makes the sprite visible
-   private SpriteRenderer sr;
+    private SpriteRenderer sr;
 
     public float jumpForce = 1000f;
     private bool isGrounded;        //this variable will tell if our player is grounded or not
@@ -31,51 +31,12 @@ public class Movement : MonoBehaviour
 
 
     // Use this for initialization
-<<<<<<< HEAD
-/*    bool IsGrounded()
-=======
-
-
     void Awake()
     {
         // anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
     }
-
-    bool IsGrounded()
->>>>>>> a9fca78247bfc00d6a06d5da9171e1baa382e640
-    {
-        Vector2 position = transform.position;
-        Vector2 direction = Vector2.down;
-        float distance = 1.0f;
-
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, whatIsGround);
-        if (hit.collider != null)
-        {
-            Debug.Log("bgkfj");
-            return true;
-        }
-<<<<<<< HEAD
-        return false;
-    }
-
-    */
-    void Awake()
-    {
-        // anim = GetComponent<Animator>();
-        rb2d = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-    }
-
- 
-=======
-
-        Debug.Log("please");
-        return false;
-
-    }
-
 
     // Update is called once per frame
     void Update()
@@ -111,9 +72,7 @@ public class Movement : MonoBehaviour
         }
 
     }
->>>>>>> a9fca78247bfc00d6a06d5da9171e1baa382e640
 
-   
     // do physics in FixedUpdate
     void FixedUpdate()
 
@@ -141,26 +100,6 @@ public class Movement : MonoBehaviour
         }
 
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        bool space = Input.GetKeyDown("space");
-        bool up = Input.GetKeyDown("up");
-
-        int yMovement = (int)Input.GetAxisRaw("Horizontal");
-
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-
-       
-            Debug.Log("help");
-            if ((space || up) && grounded)
-            {
-                jump = true;
-            }
-  
     }
 
     // Changes the way the character is facing by negating X
