@@ -7,8 +7,16 @@ public class Sight : MonoBehaviour {
     //is a maybe
     //if in sight and not mask then cone gets bigger/ more visible
 
-	// Use this for initialization
-	void Start () {
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.name == "Player")
+        {
+            DistanceDetect.isMaskUp();
+        }
+    }
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
