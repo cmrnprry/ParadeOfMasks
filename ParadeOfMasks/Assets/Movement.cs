@@ -11,39 +11,28 @@ public class Movement : MonoBehaviour
     public float moveForce = 365f;
     // the highest speed the player can get to (
     public float maxSpeed = 5f;
-    public float jumpForce = 1000f;
+
     // when you jump, this wil check if the ground is below you
-    public Transform groundCheck;
+    // public Transform groundCheck;
     //Makes the sprite visible
-    private SpriteRenderer sr;
+   private SpriteRenderer sr;
 
-    public LayerMask groundLayer;
+    public float jumpForce = 1000f;
+    private bool isGrounded;        //this variable will tell if our player is grounded or not
+    public Transform feetPos;       //this variable will store reference to transform from where we will create a circle
+    public float circleRadius;      //radius of circle
+    public LayerMask whatIsGround;  //layer our ground will have.
 
+    public float jumpTime;          //time till which we will apply jump force
+    private float jumpTimeCounter;  //time to count how long player has pressed jump key
 
-
-    private bool grounded = true;
     //private Animator anim;
     private Rigidbody2D rb2d;
 
 
     // Use this for initialization
 
-    bool IsGrounded()
-    {
-        Vector2 position = transform.position;
-        Vector2 direction = Vector2.down;
-        float distance = 1.0f;
 
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-        if (hit.collider != null)
-        {
-            Debug.Log("bgkfj");
-            return true;
-        }
-        return false;
-
-
-    }
     void Awake()
     {
         // anim = GetComponent<Animator>();
@@ -51,30 +40,65 @@ public class Movement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
+    bool IsGrounded()
+    {
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 1.0f;
+
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, whatIsGround);
+        if (hit.collider != null)
+        {
+            Debug.Log("bgkfj");
+            return true;
+        }
+
+        Debug.Log("please");
+        return false;
+
+    }
+
+
     // Update is called once per frame
     void Update()
     {
 
-        bool space = Input.GetKeyDown("space");
-        bool up = Input.GetKeyDown("up");
-
-        int yMovement = (int)Input.GetAxisRaw("Horizontal");
-
-        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-
-        if (IsGrounded())
+        //here we set the isGrounded
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, circleRadius, whatIsGround);
+        //we check if isGrounded is true and we pressed Space button
+        if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("help");
-            if ((space || up))
+            jump = true;                           //we set isJumping to true
+            jumpTimeCounter = jumpTime;                 //set jumpTimeCounter
+            rb2d.velocity = Vector2.up * jumpForce;       //add velocity to player
+        }
+
+        //if Space key is pressed and isJumping is true
+        if (Input.GetKey(KeyCode.Space) && jump == true)
+        {
+            if (jumpTimeCounter > 0)                    //we check if jumpTimeCounter is more than 0
             {
-                jump = true;
+                rb2d.velocity = Vector2.up * jumpForce;   //add velocity
+                jumpTimeCounter -= Time.deltaTime;      //reduce jumpTimeCounter by Time.deltaTime
+            }
+            else                                        //if jumpTimeCounter is less than 0
+            {
+                jump = false;                      //set isJumping to false
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.Space))              //if we unpress the Space key
+        {
+            jump = false;                          //set isJumping to false
+        }
+
     }
 
     // do physics in FixedUpdate
     void FixedUpdate()
+
     {
+
         float h = Input.GetAxis("Horizontal");
 
         //anim.SetFloat("Speed", Mathf.Abs(h));
@@ -96,13 +120,7 @@ public class Movement : MonoBehaviour
             Flip();
         }
 
-        if (jump)
-        {
-            Debug.Log("helo");
-            //anim.SetTrigger("Jump");
-            rb2d.AddForce(new Vector2(0f, jumpForce));
-            jump = false;
-        }
+
     }
 
     // Changes the way the character is facing by negating X
