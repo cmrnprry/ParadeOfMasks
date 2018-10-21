@@ -16,7 +16,8 @@ public class Movement : MonoBehaviour
     // public Transform groundCheck;
     //Makes the sprite visible
     private SpriteRenderer sr;
-    private SpriteRenderer sr;
+
+    public Animator anim;
 
     public float jumpForce = 1000f;
     private bool isGrounded;        //this variable will tell if our player is grounded or not
@@ -32,11 +33,13 @@ public class Movement : MonoBehaviour
 
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
-        // anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+
     }
     
     bool IsGrounded()
@@ -116,7 +119,9 @@ public class Movement : MonoBehaviour
         {
             jump = false;                          //set isJumping to false
         }
-        
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+
     }
 
     // do physics in FixedUpdate
