@@ -619,9 +619,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: fb5f83ed-eb99-4aad-b8be-9e14fd6dc59e
+  cloudProjectId: 25031fbb-b96c-4210-925a-f946f5e197dc
   projectName: ParadeOfMasks
-  organizationId: cmrnprry
+  organizationId: ahrtxv
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

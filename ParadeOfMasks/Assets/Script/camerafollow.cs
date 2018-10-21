@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class camerafollow : MonoBehaviour {
 
-    public GameObject Player;
+    public GameObject thingsToFollow;
 
     private Vector3 offset;
 
 	// Use this for initialization
 	void Start () {
-        offset = transform.position - Player.transform.position;
+        offset = transform.position - thingsToFollow.transform.position;
         
     }
 	
 
 	void LateUpdate () {
-        transform.position = Player.transform.position + offset;
+        transform.position = thingsToFollow.transform.position + offset;
 
     }
 }
