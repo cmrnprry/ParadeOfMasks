@@ -17,11 +17,11 @@ public class Movement : MonoBehaviour
     // public Transform groundCheck;
     //Makes the sprite visible
     private SpriteRenderer sr;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
     public Animator anim;
-=======
->>>>>>> cam/work
+//=======
+//>>>>>>> cam/work
 
     public float jumpForce = 1000f;
     private bool isGrounded;        //this variable will tell if our player is grounded or not
@@ -53,14 +53,14 @@ public class Movement : MonoBehaviour
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
 
-=======
+//=======
         speed = maxSpeed;
         counter = count;
         isMask = false;
->>>>>>> cam/work
+//>>>>>>> cam/work
     }
 
     public void isMaskUp()
