@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace335b44f148d7488a164fc8559fa0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  counter: 0
   count: 4
   isFacingRight: 0
 --- !u!1 &519420028
@@ -651,6 +652,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1770782514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 086982e2508cea94c99de97ce37aac9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 827fdb4e955e6434f881b57567ebfa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jump: 0
+  facingRight: 1
+  moveForce: 365
+  maxSpeed: 5
+  jumpForce: 1000
+  groundCheck: {fileID: 0}
