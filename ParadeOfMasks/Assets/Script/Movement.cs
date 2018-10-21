@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Movement : MonoBehaviour
 {
@@ -23,13 +24,19 @@ public class Movement : MonoBehaviour
     public float circleRadius;      //radius of circle
     public LayerMask whatIsGround;  //layer our ground will have.
 
-    public bool isMask;    public float speed;
+    public bool isMask;
+    public float speed;
 
     public float jumpTime;          //time till which we will apply jump force
     private float jumpTimeCounter;  //time to count how long player has pressed jump key
 
     public float counter;
     public float count;
+
+    public AudioMixerSnapshot slow;
+    public AudioMixerSnapshot normal;
+    public float transtionToSlow;
+    public float transtionToNormal;
 
     //private Animator anim;
     private Rigidbody2D rb2d;
@@ -43,15 +50,18 @@ public class Movement : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         speed = maxSpeed;
         counter = count;
+        isMask = false;
     }
 
     public void isMaskUp()
     {
+        counter = count;
+
         if (speed > 1)
         {
             if (isMask && counter < 0)
             {
-                counter = count;
+                Debug.Log("please");
                 speed -= 1;
             }
         }
@@ -60,10 +70,11 @@ public class Movement : MonoBehaviour
         {
             if (!isMask && counter < 0)
             {
-                counter = count;
-                speed += 1;
+                speed += 2;
             }
         }
+
+        counter = count;
     }
     
     // Update is called once per frame
@@ -100,13 +111,16 @@ public class Movement : MonoBehaviour
             jump = false;                          //set isJumping to false
         }
 
-        if (Input.GetButtonDown("x"))
+        if (Input.GetKey(KeyCode.X))
         {
             isMask = true;
+            slow.TransitionTo(transtionToSlow);
             isMaskUp();
+ 
         } else
         {
             isMask = false;
+            normal.TransitionTo(transtionToNormal);
             isMaskUp();
         }
         
@@ -115,19 +129,18 @@ public class Movement : MonoBehaviour
     // do physics in FixedUpdate
     void FixedUpdate()
     {
-
-        counter -= Time.deltaTime;
+            counter -= Time.deltaTime;
 
         float h = Input.GetAxis("Horizontal");
 
         //anim.SetFloat("Speed", Mathf.Abs(h));
 
-        if (h * rb2d.velocity.x < maxSpeed)
+        if (h * rb2d.velocity.x < speed)
             rb2d.AddForce(Vector2.right * h * moveForce);
 
         // checks if you are going too fast
-        if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
-            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+        if (Mathf.Abs(rb2d.velocity.x) > speed)
+            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed, rb2d.velocity.y);
 
         if (h > 0 && facingRight)
         {
